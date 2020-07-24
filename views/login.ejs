@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style>
+
+.bg-3 { 
+      background-color: #ffffff;
+      color: #555555;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #3f51b5f2 !important;
+  }
+
+  .active>a {
+    color: #3f51b5f2 !important;;
+  }
+  .container-fluid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #2196F3, #e91ead8f);
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid h3 {
+    background: #fff;
+    color: #3f51b5f2;;
+    padding: 10px 20px;
+    border-left: 2px solid #000;
+    width: 50%;
+}
+
+.form-layout {
+    width: 50%;
+    background: #fff;
+    padding: 10px;
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 10px #cccccc97;
+    border-radius: 10px;
+}
+
+
+
+.row {
+    width: 100%;
+    margin: 0 auto !important;
+}
+
+.form-layout .input-box {
+    display: flex;
+    margin: 5px 0px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-layout .input-box label {
+    flex-basis: 20%;
+    text-align: right;
+}
+
+.form-layout .input-box input {
+    flex-basis: 77%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 1%;
+    border: none;
+    box-shadow: 1px 1px 10px #ccccccb8;
+    border-bottom: 1px solid #000;
+}
+
+.input-box button {
+    width: 100px;
+    height: 50px;
+    margin-left: 40%;
+    background: #3f51b5f2;
+    color: #fff;
+    border: none;
+}
+
+
+</style>
+
+<body>
+<!-- <% include partials/menu %> -->
+
+<div class="container-fluid bg-3 text-center">    
+  <h3>Welcome Back</h3><br>
+  <div class="row">
+    
+        <div class="form-layout">
+            <div class="input-box">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username" value="">
+            </div>
+            <div class="input-box">
+              <label for="password">Password:</label>
+              <input type="text" id="password" name="password" value="">
+            </div>
+            <div class="input-box">
+              <button type="submit" id="btn">LOGIN</button>
+            </div>
+        </div>
+        <div id="message">
+
+        </div>
+        
+        
+        
+    </div>
+    
+  </div>
+</div>
+
+
+<script>
+var data;
+  $("#btn").on('click',function signup(e){
+   e.preventDefault();
+    data={
+      "username":$('input[name="username"]').val(),
+      "password":$('input[name="password"]').val(),
+    };
+    var formdata=JSON.stringify(data);
+    console.table(data);
+    localStorage.clear();
+    localStorage.setItem("userkaname",$('input[name="username"]').val());
+
+    window.location.href = "/loginuser2/"+$('input[name="username"]').val()+"/"+$('input[name="password"]').val()
+  
+    $("#btn").attr('disabled','disabled');
+   
+  
+  });
+
+</script>
+
+</body>
+</html>

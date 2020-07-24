@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+      input,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid;
+      }
+      .checkout-wraper {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+      }
+
+      .item {
+        box-sizing: border-box;
+        width: 100%;
+        box-shadow: 1px 1px 10px #cccccca6;
+        padding: 5px;
+        /* margin: 99px 0px; */
+        margin-top: 74px;
+      }
+
+      .item-heading {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid;
+        padding-bottom: 9px;
+        margin-bottom: 5px;
+      }
+
+      .item-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      p.toggle-qty {
+        flex-basis: 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      p.toggle-qty .dec {
+        background: red;
+        width: 30px;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+      }
+
+      p.toggle-qty .inc {
+        background: #4caf50;
+        width: 30px;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+      }
+      .place-order {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      p.order-now {
+        display: flex;
+        flex-direction: column;
+      }
+
+      p.order-now span {
+        padding: 10px;
+        background: #009688;
+        color: #fff;
+        text-align: center;
+        font-weight: 900;
+      }
+      #list-of-item {
+        padding-bottom: 87px;
+      }
+
+      p.order-now button {
+        border: none;
+        background: #009688;
+        padding: 13px 20px;
+        color: yellow;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body onload="calc()">
+    <% include partials/navbar %>
+    <div class="checkout-wraper">
+      <div id="item" style="margin-top: 74px;">
+        <h2 style="opacity: 0;">order id: <span class="oid"></span></h2>
+        <div class="item-heading">
+          <b>Id</b>
+          <b>Name</b>
+          <b>Price</b>
+          <b>Quantity</b>
+          <b>Total</b>
+        </div>
+      </div>
+      <div id="list-of-item">
+        
+        <!-- <div class="item-list">
+            <span class="id"></span>
+            <span id="pname"></span>
+            <span class="price"></span>
+            <p class="toggle-qty">
+                <span class="dec">-</span>
+                <span class="qty"> 1</span>
+                <span class="inc">+</span>
+            </p>
+            <span class="total"></span>
+        </div> -->
+      </div>
+
+      <textarea
+        name="instruction"
+        id="instruction"
+        cols="30"
+        rows="10"
+        placeholder="instruction"
+        style="margin-top: -69px;"
+      ></textarea>
+      <br />
+      <input type="text" id="customerid" placeholder="Customer id" />
+      <div class="place-order">
+        <p>Grand Total :</p>
+        <p class="order-now">
+          <span class="gtotal">&#8377; 0</span>
+          <button id="placeorder">Place Order</button>
+        </p>
+      </div>
+      <a id="shopping">Continue Shopping</a>
+
+      <% include partials/footer %>
+    </div>
+    <script>
+     //when "continue shoppping" is clicked we need to modify our localstorage(cart) to save all changes made
+     function addtocart(e) {
+        var cartitem = JSON.parse(localStorage.cart);
+        var i = 0;
+        for (i = 0; i < $(".qty").length; i++) {
+          var item = {
+            pid: $(".id")[i].innerText,
+            pname: $(".pname")[i].innerText,
+            price: $(".price")[i].innerText,
+            qty: $(".qty")[i].innerText,
+          };
+          var check = false;
+          for (var j=0 ; j<cartitem.length;j++) {
+            if (cartitem[j].pid == item.pid) {
+              if(cartitem[j].qty != item.qty){
+              cartitem[j].qty = item.qty;
+              }
+              check=true;
+            }
+          }
+          if (check == false) {
+            console.log("hey");
+            cartitem.push(item);
+          }
+        }
+        localStorage.setItem("cart", JSON.stringify(cartitem));
+      //alert(JSON.stringify(cartitem));
+      }
+
+      $("#shopping").click(function () {
+          addtocart();
+        window.location.href = "/shop";
+        });
+
+        $("#shop").click(function () {
+          addtocart();
+        window.location.href = "/shop";
+        });
+
+
+      //to create items from localstorage info
+      var cartitem = JSON.parse(localStorage.cart);
+      var gtotal = 0;
+      for (var i in cartitem) {
+        var newElement = document.createElement("div");
+        newElement.className = "item-list";
+        var total = cartitem[i].qty * cartitem[i].price;
+        newElement.innerHTML = ` <span class="id">${cartitem[i].pid}</span>
+            <span class="pname">${cartitem[i].pname}</span>
+            <span class="price">${cartitem[i].price}</span>
+            <p class="toggle-qty">
+                <span class="dec coun${i}">-</span>
+                <span class="qty">${cartitem[i].qty}</span>
+                <span class="inc coun${i}">+</span>
+            </p>
+            <span class="total">${total}</span>`;
+
+        document.getElementById("list-of-item").appendChild(newElement);
+      }
+
+      //func to calculate total
+      function calc() {
+        var n = $(".qty").length;
+        var i = 0,
+          yetotal = 0;
+        for (i = 0; i < n; i++) {
+          var total =
+            parseInt($(".qty")[i].innerText) *
+            parseInt($(".price")[0].innerText);
+          console.log();
+          $(".total")[i].innerText = total;
+          yetotal += parseInt($(".total")[i].innerText);
+        }
+        $(".gtotal").html("&#8377;" + yetotal);
+      //  addtocart();
+      }
+
+      //to increase qty
+      $(".dec").click(function () {
+        var myClass = $(this).attr("class");
+        var i_clicked = myClass.split("coun")[1];
+        var qty = parseInt($(".qty")[i_clicked].innerText);
+        console.log("quantity  - " + qty);
+        if (qty > 0) {
+          $(".qty")[i_clicked].innerText = qty - 1;
+        }
+        calc();
+      });
+
+      //to decrease qty
+      $(".inc").click(function () {
+        var myClass1 = $(this).attr("class");
+        console.log("myclass - " + myClass1);
+        var i_clicked1 = myClass1.split("coun")[1];
+        var qty1 = parseInt($(".qty")[i_clicked1].innerText);
+        console.log("quantity  - " + qty1);
+
+        $(".qty")[i_clicked1].innerText = qty1 + 1;
+        calc();
+      });
+
+      //when placing order push it to order collection of our db using ajax(post)
+      var data;
+      $(document).on("click", "#placeorder", function () {
+        addtocart();
+        custid = $("#customerid").val();
+        data = {
+          orderid: $(".oid").text(),
+          custid:localStorage.getItem("custid"),
+          prodid: JSON.parse(localStorage.cart),
+          instruction: $("#instruction").val(),
+          quantity: $(".qty").text(),
+          total: $(".gtotal").text(),
+        };
+        localStorage.setItem("cart","[]");
+        var id = $(".oid").text();
+        var id1 = JSON.stringify(id);
+        console.log(id);
+        var formdata = JSON.stringify(data);
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/saveorder",
+          data: formdata,
+          dataType: "json",
+          contentType: "application/json",
+          success: function () {
+            console.log("/thanku/" + id);
+            window.location.href = "/thanku/" + id;
+          },
+        });
+      });
+
+      //to generate random order id
+      function randomString(length, chars) {
+        var result = "";
+        for (var i = length; i > 0; --i)
+          result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+      }
+      var rString = randomString(
+        5,
+        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      );
+      $(".oid").text(rString);
+
+    </script>
+  </body>
+</html>

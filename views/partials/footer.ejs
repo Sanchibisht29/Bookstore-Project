@@ -1,0 +1,62 @@
+
+   <footer>
+       <div class="items-card">
+         <img class="img" src="https://www.freelogodesign.org/file/app/blog/20180911104538148amazon-logo.jpg">
+         Hey, this is shopping website.
+       </div>
+       
+       <div class="items-card">
+         <h4>Social Links</h4>
+         <span>
+          <i class="fab fa-facebook-f icon"></i> <a href="#"></a>
+
+          <i class="fa fa-twitter icon"></i><a href="#"></a>
+          <i class="fa fa-instagram icon"></i> <a href="#"></a>
+          <i class="fa fa-google icon"></i><a href="#"></a>
+        </span>
+       </div>
+   </footer>
+   <div class="about">
+     &copy; Copyright. Shopcart
+   </div>
+
+   
+        <script>
+        $( document ).ready(function() {
+          document.getElementById("hi_man").innerText = "Hi - "+localStorage.getItem("userkaname");
+          console.log()
+          $("#hi_man").click(function(){
+              window.location.href = "/profile/"+localStorage.getItem("userkaname");
+            });
+
+            $("#shop").click(function(){
+              window.location.href = "/shop";
+            })
+
+
+
+          $("#logout").click(function(){
+              console.log("I am clicked");
+              var data=JSON.parse(localStorage.getItem("cart"));
+              var data=
+              {
+                "username":localStorage.getItem("userkaname"),
+                "cart":JSON.parse(localStorage.getItem("cart"))
+              };
+              var formdata=JSON.stringify(data);
+             $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/updatecart",
+          data: formdata,
+          dataType: "json",
+          contentType : "application/json",
+          });
+              localStorage.clear();
+              window.location.href = "/user";
+            });
+          });
+      
+           $(".bar-icon").click(function(){
+             $(".menu-item").toggleClass('open-menu');
+           });
+        </script>

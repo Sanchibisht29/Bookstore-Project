@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/jquery-1.9.1.min.js"></script>
+</head>
+
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300);
+
+body {
+	
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+table {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	
+	transition: all 0.2s ease;
+	
+	transform: translateX(-50%) translateY(-50%);
+	
+	background: #fff;
+	
+	padding: 20px;
+}
+
+.name {
+	font-size: 30px;
+	border-bottom: 2px solid #888;
+	margin-bottom: 20px;
+}
+.name:first-letter {
+	font-size: 300%;
+}
+
+.label {
+	width: 70px;
+	font-weight: bold;
+}
+
+.label, .phone, .mobile, .email {
+	display: inline-block;
+}
+
+.details-td {
+	border-right: 1px solid #eee;
+	white-space: nowrap;
+	
+	padding: 20px;
+	padding-right: 30px;
+}
+
+.description-td {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: justify;
+	margin-top: 15px;
+}
+	.description {
+		outline: 0px solid transparent;
+		border: 0px solid transparent;
+	}
+	.edit {
+		position: absolute;
+		top: 0px;
+		right: 0;
+		
+		width: 13px;
+		height: 13px;
+		
+		cursor: pointer;
+	}
+	.update {
+		display: none;
+		position: absolute;
+		right: 20px;
+		bottom: 0;
+		background: #c2e59c;
+		border: 0;
+		padding: 5px;
+		width: 80px;
+		color: #333;
+		outline: 0px solid transparent;
+		border: 0px solid transparent;
+	}
+	.table{
+		margin-top: -20px;
+	}
+</style>
+
+
+<body>
+	<% include partials/navbar %>
+	<div class="table">
+    <table>
+        <tr>
+            <td colspan="3">
+                <div class="name"><%= user.name %></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="details-td">
+                <div class="label">Phone</div> : <div class="phone"><%= user.mobile %></div>
+                <br><div class="label">Email</div> : <div class="mobile"><%= user.email %></div>
+                <br><div class="label">Address</div> : <div class="email"><%= user.address %></div>
+            </td>
+            <td class="description-td">
+                <div class="description" spellcheck="false">This is a Short Description of the Client</div>
+                
+                <input type="button" value="Update" class="update">
+            </td>
+        </tr>
+	</table>
+</div>
+    <!-- <% include partials/footer %> -->
+</body>
+
+<script>
+    $(document).ready(function() {
+		document.getElementById("hi_man").innerText = "Hi - "+localStorage.getItem("userkaname");
+})
+</script>
+</html>

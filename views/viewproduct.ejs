@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://kit.fontawesome.com/14efc8c92b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<% include partials/viewproductcss %>
+<body>
+    
+        <div class="lightbox-blanket">
+          <div class="pop-up-container">
+            <div class="pop-up-container-vertical">
+              <div class="pop-up-wrapper">
+                <div class="go-back" onclick="GoBack();"><i class="fa fa-arrow-left"></i>
+                </div>
+                <div class="product-details">
+                  <div class="product-left">
+                    <div class="product-info">
+                      <div class="product-manufacturer"><%= prod.pname%></div>
+        
+                      <div class="product-price" price-data=<%= prod.price%>><%= prod.price%></div>
+                    </div>
+                    <div class="product-image">
+                      <img src= <%= "../"+prod.img%> >
+                    </div>
+                  </div>
+                  <div class="product-right">
+                    <div class="product-description">
+                      <%= prod.description%>
+                    </div>
+                    <div class="product-available">
+                      In stock.
+                    </div>
+                  
+      
+                    </div>
+                    <div class="product-quantity">
+                      <label for="product-quantity-input" class="product-quantity-label">Quantity</label>
+                      <div class="product-quantity-subtract">
+                        <i class="fa fa-chevron-left"></i>
+                      </div>
+                      <div>
+                        <input type="text" id="product-quantity-input" placeholder="+" value="1" />
+                      </div>
+                      <div class="product-quantity-add">
+                        <i class="fa fa-chevron-right"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-bottom">
+                    <div class="product-checkout">
+                      Total Price
+                      <div class="product-checkout-total">
+                        <i class="fa fa-usd"></i>
+                        <div class="product-checkout-total-amount">
+                          0.00
+                        </div>
+                      </div>
+                    </div>
+                    <div class="product-checkout-actions">
+                      <a class="add-to-cart" onclick=addtocart()>Add to Cart</a>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    <div class="pid" style="display: none;"><%= prod.pid%></div>
+</body>
+
+<script>
+
+function GoBack(){
+  window.location.href = "/shop"
+}
+
+//Calculate new total when the quantity changes.
+function CalcPrice (qty){
+  var price = $(".product-price").attr("price-data");
+  var total = parseFloat((price * qty)).toFixed(2);
+  $(".product-checkout-total-amount").text(total);
+}
+
+//Reduce quantity by 1 if clicked
+$(document).on("click", ".product-quantity-subtract", function(e){
+  var value = $("#product-quantity-input").val();
+  //console.log(value);
+  var newValue = parseInt(value) - 1;
+  if(newValue < 0) newValue=0;
+  $("#product-quantity-input").val(newValue);
+  CalcPrice(newValue);
+});
+
+//Increase quantity by 1 if clicked
+$(document).on("click", ".product-quantity-add", function(e){
+  var value = $("#product-quantity-input").val();
+  //console.log(value);
+  var newValue = parseInt(value) + 1;
+  $("#product-quantity-input").val(newValue);
+  CalcPrice(newValue);
+});
+
+$(document).on("blur", "#product-quantity-input", function(e){
+  var value = $("#product-quantity-input").val();
+  //console.log(value);
+  CalcPrice(value);
+});
+
+
+//update localstorage(cart) if product is already present else push new item to cart
+function addtocart(e){
+var cartitem= JSON.parse(localStorage.cart);
+var item={
+  "pid":$(".pid").text(),
+  "pname":$(".product-manufacturer").text(),
+  "price":$(".product-price").text(),
+  "qty":$("#product-quantity-input").val()
+}
+var check=false;
+for(var i in cartitem){
+if(cartitem[i].pid==item.pid){
+  cartitem[i].qty=item.qty;
+  check=true;
+  break;
+}
+}
+
+//product does not exist and needs to be added
+if(check==false){
+cartitem.push(item);
+}
+localStorage.setItem("cart",JSON.stringify(cartitem));
+window.location.href="/checkout/";
+};
+
+</script>
+</html>

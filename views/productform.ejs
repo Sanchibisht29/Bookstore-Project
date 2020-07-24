@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+
+
+.bg-3 { 
+      background-color: #ffffff;
+      color: #555555;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #3f51b5f2 !important;
+  }
+
+  .active>a {
+    color: #3f51b5f2 !important;;
+  }
+  .container-fluid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #2196F3, #e91ead8f);
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid h3 {
+    background: #fff;
+    color: #3f51b5f2;;
+    padding: 10px 20px;
+    border-left: 2px solid #000;
+    width: 90%;
+}
+
+.form-layout {
+    width: 90%;
+    background: #fff;
+    padding: 10px;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 10px #cccccc97;
+    border-radius: 10px;
+}
+
+
+
+.row {
+    width: 100%;
+    margin: 0 auto !important;
+}
+
+
+.form-layout .input-box {
+    display: flex;
+    margin: 5px 0px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-layout .input-box label {
+    flex-basis: 20%;
+    text-align: right;
+}
+
+.form-layout .input-box input {
+    flex-basis: 77%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 1%;
+    border: none;
+    box-shadow: 1px 1px 10px #ccccccb8;
+    border-bottom: 1px solid #000;
+}
+
+.input-box button {
+    width: 100px;
+    height: 50px;
+    margin-left: 20%;
+    background: #3f51b5f2;
+    color: #fff;
+    border: none;
+}
+
+.bar-icon{
+    display: none;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+}
+
+.open-menu{
+    display: flex !important;
+    position: fixed ;
+    top: 90px;
+    z-index: 9;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 768px) {
+   
+    header{
+        flex-direction: row;
+    justify-content: space-between;
+        align-items: center;
+    }
+    /* footer{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    } */
+    .bar-icon{
+    display: block;
+    }
+
+.tab{
+    display: none;
+    margin-top: 61px;
+    position: absolute;
+}
+}
+
+</style>
+</head>
+<body style="text-align: center;">
+<header>
+<h2>Admin Panel</h2>
+<p>You can control Everything from here</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Product')">Add Product</button>
+  <button class="tablinks" onclick="openCity(event, 'Name')">Update Product Name</button>
+  <button class="tablinks" onclick="openCity(event, 'Price')">Update Product Price</button>
+  <button class="tablinks" onclick="openCity(event, 'Description')">Update Product Description</button>
+  <button class="tablinks" onclick="openCity(event, 'Category')">Update Product Category</button>
+  <button class="tablinks" onclick="openCity(event, 'Image')">Update Product Image</button>
+</div>
+<div class="bar-icon"><img src="img/open-menu.png" alt=""></div>
+</header>
+<div id="Product" class="tabcontent">
+  <h3>Add New</h3>
+  <p>Create New Product</p>
+  <hr>
+  
+<div class="container-fluid bg-3 text-center">    
+  <h3>Product Details</h3><br>
+  <div class="row">
+    
+      <form action="/saveproduct" method="post"> 
+        <div class="form-layout">
+          <div class="input-box">
+            <label for="pid">Product Id:</label>
+            <input type="text" id="pid" name="pid" value="">
+          </div>
+            <div class="input-box">
+              <label for="pname">Product Name:</label>
+              <input type="text" id="pname" name="pname" value="">
+            </div>
+            <div class="input-box">
+              <label for="price">Price:</label>
+              <input type="text" id="price" name="price" value="">
+            </div>
+            <div class="input-box">
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" value="">
+            </div>
+            <div class="input-box">
+              <label for="cat">Category:</label>
+              <input type="text" id="cat" name="cat" value="">
+            </div>
+            <div class="input-box">
+              <label for="img">Image Url:</label>
+              <input type="text" id="img" name="img" value="">
+            </div>
+            <div class="input-box">
+              <button type="submit" id="btn">SUBMIT</button>
+            </div>
+        </div>
+       
+        
+        
+        
+      </form>
+    </div>
+    
+  </div>
+</div>
+
+<!-- next -->
+
+<div id="Name" class="tabcontent">
+  <h3>Update Name</h3>
+  <p>Change the Name of any Product</p> 
+  <div class="container-fluid bg-3 text-center">    
+    <h3>Product Details</h3><br>
+  <div class="row">
+    
+    <form action="/updateproductname" method="post"> 
+      <div class="form-layout">
+        <div class="input-box">
+          <label for="pid1">Product Id:</label>
+          <input type="text" id="pid1" name="pid1" value="">
+        </div>
+          <div class="input-box">
+            <label for="upname">New Product Name:</label>
+            <input type="text" id="upname" name="upname" value="">
+          </div>
+          <div class="input-box">
+            <button type="submit" id="btn1">SUBMIT</button>
+          </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  
+</div>
+
+<!-- next -->
+
+<div id="Price" class="tabcontent">
+  <h3>Update Price</h3>
+  <p>Change the Name of any Product</p> 
+  <div class="container-fluid bg-3 text-center">    
+    <h3>Product Details</h3><br>
+  <div class="row">
+    
+    <form action="/updateproductprice" method="post"> 
+      <div class="form-layout">
+        <div class="input-box">
+          <label for="pid2">Product Id:</label>
+          <input type="text" id="pid2" name="pid2" value="">
+        </div>
+          <div class="input-box">
+            <label for="uprice">New Product Price:</label>
+            <input type="text" id="uprice" name="uprice" value="">
+          </div>
+          <div class="input-box">
+            <button type="submit" id="btn2">SUBMIT</button>
+          </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  
+</div>
+
+<!-- next -->
+
+<div id="Description" class="tabcontent">
+  <h3>Update Description</h3>
+  <p>Change the Name of any Product</p> 
+  <div class="container-fluid bg-3 text-center">    
+    <h3>Product Details</h3><br>
+  <div class="row">
+    
+    <form action="/updateproductdescription" method="post"> 
+      <div class="form-layout">
+          <div class="input-box">
+            <label for="pid3">Product Id:</label>
+            <input type="text" id="pid3" name="pid3" value="">
+          </div>
+          <div class="input-box">
+            <label for="udescription">New Product Description:</label>
+            <input type="text" id="udescription" name="udescription" value="">
+          </div>
+          <div class="input-box">
+            <button type="submit" id="btn3">SUBMIT</button>
+          </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  
+</div>
+
+<!-- next -->
+
+<div id="Category" class="tabcontent">
+  <h3>Update Category</h3>
+  <p>Change the Category of any Product</p> 
+  <div class="container-fluid bg-3 text-center">    
+    <h3>Product Details</h3><br>
+  <div class="row">
+    
+    <form action="/updateproductcategory" method="post"> 
+      <div class="form-layout">
+        <div class="input-box">
+          <label for="pid4">Product Id:</label>
+          <input type="text" id="pid4" name="pid4" value="">
+        </div>
+          <div class="input-box">
+            <label for="ucat">New Product Category:</label>
+            <input type="text" id="ucat" name="ucat" value="">
+          </div>
+          <div class="input-box">
+            <button type="submit" id="btn4">SUBMIT</button>
+          </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  
+</div>
+
+<!-- next -->
+
+<div id="Image" class="tabcontent">
+  <h3>Update Image</h3>
+  <p>Change the Name of any Product</p> 
+  <div class="container-fluid bg-3 text-center">    
+    <h3>Product Details</h3><br>
+  <div class="row">
+    
+    <form action="/updateproductimage" method="post"> 
+      <div class="form-layout">
+          <div class="input-box">
+            <label for="pid5">Product Id:</label>
+            <input type="text" id="pid5" name="pid5" value="">
+          </div>
+          <div class="input-box">
+            <label for="uimg">New Product Image:</label>
+            <input type="text" id="uimg" name="uimg" value="">
+          </div>
+          <div class="input-box">
+            <button type="submit" id="btn5">SUBMIT</button>
+          </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+
+
+var data;
+  $("#btn").on('click',function signup(e){
+    e.preventDefault();
+    data={
+      "pname":$('input[name="pname"]').val(),
+      "pid":$('input[name="pid"]').val(),
+      "price":$('input[name="price"]').val(),
+      "description":$('input[name="description"]').val(),
+      "cat":$('input[name="cat"]').val(),
+      "img":$('input[name="img"]').val(),
+    };
+    var formdata=JSON.stringify(data);
+    console.log(formdata);
+  
+    $("#btn").attr('disabled','disabled');
+    $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/saveproduct",
+          data: formdata,
+          dataType: "json",
+          contentType : "application/json",
+          success: function(){
+            $("#btn").attr('disabled',false);
+            console.log("callback called");
+          $(".tab a").click();
+        }
+        });  
+  
+  });
+
+
+  $("#btn1").on('click',function signup(e){
+    e.preventDefault();
+     var x=$('input[name="pid1"]').val();
+     var y=$('input[name="upname"]').val();
+  
+    $("#btn1").attr('disabled','disabled');
+    $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/product/updateproductname/"+x+"/"+y,
+          dataType: "json",
+          contentType : "application/json",
+          success: function(){
+            $("#btn").attr('disabled',false);
+            console.log("callback called");
+          $(".tab a").click();
+        }
+        });  
+  
+  });
+
+
+  $("#btn2").on('click',function signup(e){
+    e.preventDefault();
+     var x=$('input[name="pid2"]').val();
+     var y=$('input[name="uprice"]').val();
+  
+    $("#btn2").attr('disabled','disabled');
+    $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/product/updateproductprice/"+x+"/"+y,
+          dataType: "json",
+          contentType : "application/json",
+          success: function(){
+            $("#btn").attr('disabled',false);
+            console.log("callback called");
+          $(".tab a").click();
+        }
+        });  
+  
+  });
+
+  $("#btn3").on('click',function signup(e){
+    e.preventDefault();
+     var x=$('input[name="pid3"]').val();
+     var y=$('input[name="udescription"]').val();
+  
+    $("#btn3").attr('disabled','disabled');
+    $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/product/updateproductdescription/"+x+"/"+y,
+          dataType: "json",
+          contentType : "application/json",
+          success: function(){
+            $("#btn").attr('disabled',false);
+            console.log("callback called");
+          $(".tab a").click();
+        }
+        });  
+  
+  });
+
+
+  $("#btn4").on('click',function signup(e){
+    e.preventDefault();
+     var x=$('input[name="pid4"]').val();
+     var y=$('input[name="ucat"]').val();
+  
+    $("#btn4").attr('disabled','disabled');
+    $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/product/updateproductcategory/"+x+"/"+y,
+          dataType: "json",
+          contentType : "application/json",
+          success: function(){
+            $("#btn").attr('disabled',false);
+            console.log("callback called");
+          $(".tab a").click();
+        }
+        });  
+  
+  });
+  $("#btn5").on('click',function signup(e){
+    e.preventDefault();
+     var x=$('input[name="pid5"]').val();
+     var y=$('input[name="uimg"]').val();
+  
+    $("#btn5").attr('disabled','disabled');
+    $.ajax({
+          type: "POST",
+          url: "http://localhost:3007/product/updateproductimage/"+x+"/"+y,
+          dataType: "json",
+          contentType : "application/json",
+          success: function(){
+            $("#btn").attr('disabled',false);
+            console.log("callback called");
+          $(".tab a").click();
+        }
+        });  
+  
+  });
+
+
+  $(".bar-icon").click(function(){
+             $(".tab").toggleClass('open-menu');
+           });
+
+</script>
+   
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+

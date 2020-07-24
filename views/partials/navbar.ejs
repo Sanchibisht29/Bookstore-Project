@@ -1,0 +1,268 @@
+<script src="https://kit.fontawesome.com/14efc8c92b.js" crossorigin="anonymous"></script>
+
+<style>
+
+    
+header {
+    border-bottom: 2px black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+}
+.bar-icon{
+    display: none;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* NAVBAR SECTION */
+header ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 19px;
+    list-style: none;
+}
+
+header ul li {
+    margin: 0px 10px;
+    padding: 3px;
+}
+
+header ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.img {
+   
+  width: 155px;
+    padding: 5px 42px;
+    border-radius: 9px;
+    background: white;
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    .products .product-box {
+        flex-basis: 47% !important;
+    }
+}
+.open-menu{
+    display: flex !important;
+    position: fixed ;
+    top: 90px;
+    z-index: 9;
+    width: 100%;
+    height: auto;
+    background: #000;
+    flex-direction: column;
+}
+@media only screen and (max-width: 500px) {
+    .products .product-box {
+        flex-basis: 100% !important;
+    }
+    header{
+        flex-direction: row;
+    justify-content: space-between;
+        align-items: center;
+    }
+    footer{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .bar-icon{
+    display: block;
+    }
+
+.menu-item{
+    display: none;
+}
+}
+
+/* NAVBAR END */
+/* footer */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+        
+        * {
+          font-family: Roboto;
+        }
+        footer {
+          width: 1508px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #060606;
+    color: white; 
+    background: url(https://www.remax.in/frontend/images/ftr-bg.png);
+    background-repeat: repeat;
+   color: #000;
+
+    
+    /* width: 100vw; */
+    /* width: 1508px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: url(https://www.remax.in/frontend/images/ftr-bg.png);
+    background-repeat: no-repeat;
+    color: white;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    text-align: center; */
+}
+.about{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .items-card {
+    flex-basis: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+}
+        section {
+          width: 100%;
+          display: inline-block;
+          background: #ccc;
+          height: 60vh;
+          text-align: center;
+          font-size: 22px;
+          font-weight: 700;
+          text-decoration: underline;
+        }
+        
+        .footer-distributed {
+          background-color: #292c2f;
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+          box-sizing: border-box;
+          width: 100%;
+          text-align: left;
+          font: normal 16px sans-serif;
+          padding: 45px 50px;
+        }
+        
+        .footer-distributed .footer-left p {
+          color: #8f9296;
+          font-size: 14px;
+          margin: 0;
+        }
+        /* Footer links */
+        
+        .footer-distributed p.footer-links {
+          font-size: 18px;
+          font-weight: bold;
+          color: #ffffff;
+          margin: 0 0 10px;
+          padding: 0;
+          transition: ease .25s;
+        }
+        
+        .footer-distributed p.footer-links a {
+          display: inline-block;
+          line-height: 1.8;
+          text-decoration: none;
+          color: inherit;
+          transition: ease .25s;
+        }
+        
+        .footer-distributed .footer-links a:before {
+          content: "·";
+          font-size: 20px;
+          left: 0;
+          color: #fff;
+          display: inline-block;
+          padding-right: 5px;
+        }
+        
+        .footer-distributed .footer-links .link-1:before {
+          content: none;
+        }
+        
+        .footer-distributed .footer-right {
+          float: right;
+          margin-top: 6px;
+          max-width: 180px;
+        }
+        
+        .footer-distributed .footer-right a {
+          display: inline-block;
+          width: 35px;
+          height: 35px;
+          background-color: #33383b;
+          border-radius: 2px;
+          font-size: 20px;
+          color: #ffffff;
+          text-align: center;
+          line-height: 35px;
+          margin-left: 3px;
+          transition:all .25s;
+        }
+        
+        .footer-distributed .footer-right a:hover{transform:scale(1.1); -webkit-transform:scale(1.1);}
+        
+        .footer-distributed p.footer-links a:hover{text-decoration:underline;}
+        
+        /* Media Queries */
+        
+        @media (max-width: 600px) {
+          .footer-distributed .footer-left, .footer-distributed .footer-right {
+            text-align: center;
+          }
+          .footer-distributed .footer-right {
+            float: none;
+            margin: 0 auto 20px;
+          }
+          .footer-distributed .footer-left p.footer-links {
+            line-height: 1.8;
+          }
+        }
+       
+
+    .icon{
+      padding-right:3px ;
+    }
+
+
+
+
+
+
+</style>
+
+<header>
+   
+    <div class="child-1-1"><img class="img" src="https://www.freelogodesign.org/file/app/blog/20180911104538148amazon-logo.jpg" ></div>
+    <ul class="menu-item">
+      <li><a  id="shop">Shop</a></li>
+      <li><a href="/checkout" id="cartsystem">Cart</a></li>
+      <li><a href="/owner">Owner</a></li>
+      <li><a href="#" id="hi_man">Username</a></li>
+      <li><a href="#" id="logout">Logout</a></li>
+    </ul>
+    <div class="bar-icon"><i class="fas fa-bars"></i></div>
+    <!-- <div class="bar-icon"><img src="img/open-menu.png" alt=""></div> -->
+  </header>
+  
+  

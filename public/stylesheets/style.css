@@ -1,0 +1,121 @@
+.bg-3 { 
+      background-color: #ffffff;
+      color: #555555;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+
+  .active>a {
+    color: #1abc9c !important;;
+  }
+  .container-fluid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #009688, #4CAF50);
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid h3 {
+    background: #fff;
+    color: #009688;
+    padding: 10px 20px;
+    /* border-left: 2px solid #000; */
+    width: 100%;
+}
+
+.form-layout {
+    width: 90%;
+    background: #fff;
+    padding: 10px;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 10px #cccccc97;
+    border-radius: 10px;
+}
+
+.row {
+    width: 100%;
+    margin: 0 auto !important;
+}
+
+.form-layout .input-box {
+    display: flex;
+    margin: 5px 0px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-layout .input-box label {
+    flex-basis: 20%;
+    text-align: right;
+}
+
+.form-layout .input-box input {
+    flex-basis: 77%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 1%;
+    border: none;
+    box-shadow: 1px 1px 10px #ccccccb8;
+    border-bottom: 1px solid #000;
+}
+
+.input-box button {
+    width: 100px;
+    height: 50px;
+    margin-left: 20%;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+#message{
+    font-weight: bold;
+    color: white;
+    font-size:larger;
+}
+a{
+    font-weight: bold;
+    color: white;
+    font-size:larger;
+}
+@media only screen and (max-width: 500px) {
+.form-layout .input-box label {
+    flex-basis: 29%;
+    text-align: right;
+}
+
+.input-box button {
+    width: 71px;
+    height: 40px;
+    margin-left: 28%;
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.container-fluid h3 {
+    background: #fff;
+    color: #009688;
+    padding: 14px 18px;
+    width: 91%;
+}
+}
